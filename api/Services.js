@@ -74,7 +74,7 @@ const Services = [
     icon: Leaf,
     subtitle: 'Earn Carbon Credits. Build Resilient Farms.',
     title: 'CarbonGrow',
-    lgdescription:'We help farmers go green andd get paid for it. Through agroforestry and regenerative practices, CarbonGrow enables farms to sequester carbon and sell verified credits in global markets. Easy onboarding. Transparent tracking. Real earnings.',
+    lgdescription:'We help farmers go green and get paid for it. Through agroforestry and regenerative practices, CarbonGrow enables farms to sequester carbon and sell verified credits in global markets. Easy onboarding. Transparent tracking. Real earnings.',
     description: 'Climate Action Meets Farm Income',
     slug: 'https://carbongrow.shambarecords.com'
   },
@@ -91,11 +91,11 @@ const Services = [
   {
     id: 8,
     image: CLD_TRACEXPERT, // was local img4
-    icon: ReceiptEuro,
+    icon: Hexagon,
     subtitle: 'Trust, Transparency & Trade Reinvented',
     title: 'Farmer Coupons',
     lgdescription: 'To drive this transformation, Shamba Records is launching an innovative collection of tiered digital coupons aimed at empowering and uplifting Africa’s smallholder farmers. Each digital coupon symbolizes a meaningful level of support, enabling you to make a direct impact on lives while fostering sustainable agriculture.',
-    description: 'Millions of African farmers are trapped in poverty due to a lack of access to credit, modern tools, and sustainable resources.',
+    description: 'Millions of African farmers lack credit, tools, and support.',
     slug: 'https://fundraiser.shambarecords.com/'
   },
   {
@@ -104,7 +104,7 @@ const Services = [
     icon: Boxes, 
     subtitle: 'Bridging the $170B Lending Gap in Agriculture',
     title: 'MicroVault',
-    lgdescription: 'MicroVault by Shamba Records is a blockchain-powered micro-lending engine designed to unlock financial access for Africa’s smallholder farmers. By verifying and generating verifiable digital credentials, MicroVaulr connects farmers to banks, microfinance institutions, and DeFi platforms with AI-driven credit scoring and transparent, on-chain lending via Stellar’s Soroban smart contracts and ERC-4626 vaults. The result: affordable, scalable, and trustworthy financing that transforms productivity, resilience, and incomes for millions of farmers.',
+    lgdescription: 'MicroVault is a blockchain-powered micro-lending engine that verifies farmers’ digital credentials and uses AI-driven credit scoring with transparent on-chain lending (Stellar Soroban, ERC-4626) to connect smallholders with banks, MFIs, and DeFi—unlocking fast, affordable, and scalable finance.',
     description: 'AI + Blockchain Lending Engine for Africa’s Farmers',
     slug: 'https://microvault.shambarecords.com/'
   }  

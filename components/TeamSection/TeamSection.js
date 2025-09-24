@@ -58,7 +58,7 @@ const TeamSection = (props) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6 col-12">
-                            <SectionTitle subtitle={'The Humans of Shamba Records'} title={'Passionate Minds. Real Impact.'} />
+                            <SectionTitle subtitle={'The Team at Shamba Records'} title={'Passionate Minds, Real Impact.'} />
                         </div>
                     </div>
                 </div>

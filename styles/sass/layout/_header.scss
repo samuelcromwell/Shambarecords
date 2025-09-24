@@ -402,8 +402,15 @@
 	}
 }
 
+/* before */
 .wpo-site-header .container-fluid {
 	padding-right: 0;
+}
+
+/* after */
+.wpo-site-header .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @media (max-width: 991px) {
@@ -2153,3 +2160,34 @@
 
 
 
+/* ---- Mobile header alignment fixes ---- */
+@media (max-width: 991px) {
+  /* Remove the default left padding that’s pushing the logo inwards */
+  .wpo-site-header .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Make the row distribute the two columns to the extremes */
+  .wpo-site-header .navigation .row.align-items-center {
+    justify-content: space-between !important;
+  }
+
+  /* Stop centering the logo on mobile */
+  .wpo-site-header .navbar-header {
+    text-align: left !important;
+  }
+
+  /* Ensure the brand hugs the left edge */
+  .wpo-site-header .navbar-header .navbar-brand {
+    margin-left: 0 !important;
+    padding-left: 10px; /* small breathing room; set to 0 if you want truly edge-to-edge */
+  }
+
+  /* Ensure the mobile toggler hugs the right edge */
+  .wpo-site-header .showmenu {
+    margin-left: auto !important;   /* push to the far right */
+    margin-right: 0 !important;
+    padding-right: 10px;            /* small breathing room */
+  }
+}

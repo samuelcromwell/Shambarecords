@@ -27,7 +27,7 @@ const AboutPage = () => {
             <FeaturesSectionS2 hclass={'wpo-features-section-s2'} />
             <Testimonial hclass={'wpo-testimonial-section section-padding'} />
             <PartnersSection CollClass={'wpo-partner-section section-padding'} />
-            {/* <TeamSection hclass={'wpo-team-section-s2 section-padding'} /> */}
+            <TeamSection hclass={'wpo-team-section-s2 section-padding'} />
             <CtaSection hclass={'wpo-cta-section'} />
             <MapSection />
             <Footer hclass={'wpo-site-footer'} />
