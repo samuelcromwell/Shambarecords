@@ -1,5 +1,5 @@
 // pages/_document.js
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
   render() {
@@ -17,20 +17,19 @@ export default class MyDocument extends Document {
           {/* Favicon */}
           <link rel="icon" href="/Logo/logovector.svg" />
 
-          {/* 🚀 Preload ALL hero images so they begin downloading before paint */}
-          <link rel="preload" as="image" href="/images/hero/smart-season.jpg" />
-          <link rel="preload" as="image" href="/images/hero/cashboost.jpg" />
-          <link rel="preload" as="image" href="/images/hero/vet-care.jpg" />
-          <link rel="preload" as="image" href="/images/hero/shamba-shield.jpg" />
-          <link rel="preload" as="image" href="/images/hero/shamba-connect.jpg" />
-          {/* (Optional) add type= for slight hinting:
-              type="image/png" / type="image/jpeg" */}
+          {/* Networking hints for Cloudinary (we now serve hero images from Cloudinary) */}
+          <meta httpEquiv="x-dns-prefetch-control" content="on" />
+          <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+          <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
+
+          {/* Do NOT preload hero images here. 
+              Next/Image will add a preload for the LCP image when `priority` is set. */}
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

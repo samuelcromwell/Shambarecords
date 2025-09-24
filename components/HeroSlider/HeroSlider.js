@@ -10,20 +10,37 @@ const ClickHandler = () => {
 };
 
 /**
- * Cloudinary URLs with delivery transforms:
- * - f_auto: serve best format (AVIF/WebP/JP2) per browser
- * - q_auto: pick optimal quality per asset
- * (inserted as a transformation segment after /upload/)
+ * Cloudinary public IDs (no domain, just the path after /upload/)
  */
-const SLIDER_SMART_SEASON = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711560/smart-season_hv2xwd.jpg';
-const SLIDER_CASHBOOST     = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711560/cashboost_umchtl.jpg';
-const SLIDER_VETCARE       = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711561/vet-care_z9x2fl.jpg';
-const SLIDER_SHIELD        = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711560/shamba-shield_is5dnc.jpg';
-const SLIDER_CONNECT       = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711559/shamba-connect_u5vh0m.jpg';
+const CLD_SMART_SEASON = 'v1758711560/smart-season_hv2xwd.jpg';
+const CLD_CASHBOOST    = 'v1758711560/cashboost_umchtl.jpg';
+const CLD_VETCARE      = 'v1758711561/vet-care_z9x2fl.jpg';
+const CLD_SHIELD       = 'v1758711560/shamba-shield_is5dnc.jpg';
+const CLD_CONNECT      = 'v1758711559/shamba-connect_u5vh0m.jpg';
 
 // Tiny blur placeholder for non-initial slides
 const BLUR =
   'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEA8QEA8PEA8QDw8QDxAPEA8QDxAWFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGi0fHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAQMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAFBAb/xAAZEQADAQEBAAAAAAAAAAAAAAABAgMAHhH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAQT/xAAWEQEBAQAAAAAAAAAAAAAAAAABEQL/2gAMAwEAAhEDEQA/AL8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=';
+
+/**
+ * Cloudinary loader for Next/Image
+ * - f_auto: best format per browser
+ * - q_auto (or explicit quality)
+ * - dpr_auto: HiDPI aware
+ * - w_[width], c_fill,g_auto: responsive sizing + smart crop
+ * (If your images are 16:9 already, this won’t crop; it just keeps the subject centered if needed.)
+ */
+const cldLoader = ({ src, width, quality }) => {
+  const q = quality ? `q_${quality}` : 'q_auto';
+  return `https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,${q},dpr_auto,w_${width},c_fill,g_auto/${src}`;
+};
+
+/** Tighter sizes map so small screens don’t pull 1920px */
+const SIZES =
+  '(min-width:1536px) 1536px, ' +
+  '(min-width:1280px) 1280px, ' +
+  '(min-width:1024px) 1024px, ' +
+  '(min-width:768px) 768px, 100vw';
 
 const HeroSlider = () => {
   const settings = {
@@ -32,50 +49,39 @@ const HeroSlider = () => {
     autoplaySpeed: 3000,
     arrows: true,
     dots: false,
-    // keep slick lazy loading disabled so Next/Image can manage it
-    // lazyLoad: 'progressive',
-    waitForAnimate: false, // snappier feel between slides
+    waitForAnimate: false,
     responsive: [
       {
         breakpoint: 991,
-        settings: {
-          arrows: false,
-          dots: true,
-        },
+        settings: { arrows: false, dots: true },
       },
     ],
   };
 
   return (
     <>
-      {/* Resource hints + Preload */}
+      {/* Connection hints only; let Next/Image handle LCP preload via `priority` */}
       <Head>
-        {/* Speed up connection to Cloudinary */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
-
-        {/* Preload the first TWO hero images for instant rendering */}
-        <link rel="preload" as="image" href={SLIDER_SMART_SEASON} imagesrcset={`${SLIDER_SMART_SEASON} 1920w`} imagesizes="100vw" />
-        <link rel="preload" as="image" href={SLIDER_CASHBOOST} imagesrcset={`${SLIDER_CASHBOOST} 1920w`} imagesizes="100vw" />
       </Head>
 
       <section className="hero-section">
         <Slider {...settings} className="hero-slider">
-          {/* SLIDER 1 (No blur, absolute priority) */}
+          {/* SLIDE 1 (LCP: eager + priority) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
+                  loader={cldLoader}
                   className="animated"
-                  src={SLIDER_SMART_SEASON}
+                  src={CLD_SMART_SEASON}
                   alt="Shamba SmartSeason"
-                  // Absolute highest priority for LCP
                   priority
                   loading="eager"
                   fetchPriority="high"
-                  sizes="100vw"
-                  // No placeholder to avoid any transition shimmer
+                  sizes={SIZES}
                   width={1920}
                   height={1080}
                 />
@@ -111,19 +117,19 @@ const HeroSlider = () => {
             </div>
           </div>
 
-          {/* SLIDER 2 (No blur, very high priority) */}
+          {/* SLIDE 2 (lazy + blur) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
+                  loader={cldLoader}
                   className="animated"
-                  src={SLIDER_CASHBOOST}
+                  src={CLD_CASHBOOST}
                   alt="Shamba Cash Boost"
-                  // Next-most important frame—also eager
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
-                  sizes="100vw"
+                  loading="lazy"
+                  sizes={SIZES}
+                  placeholder="blur"
+                  blurDataURL={BLUR}
                   width={1920}
                   height={1080}
                 />
@@ -157,17 +163,17 @@ const HeroSlider = () => {
             </div>
           </div>
 
-          {/* SLIDER 3 (keep subtle blur for graceful decode) */}
+          {/* SLIDE 3 (lazy + blur) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
+                  loader={cldLoader}
                   className="animated"
-                  src={SLIDER_VETCARE}
+                  src={CLD_VETCARE}
                   alt="Shamba VetCare+"
                   loading="lazy"
-                  fetchPriority="low"
-                  sizes="100vw"
+                  sizes={SIZES}
                   placeholder="blur"
                   blurDataURL={BLUR}
                   width={1920}
@@ -203,17 +209,17 @@ const HeroSlider = () => {
             </div>
           </div>
 
-          {/* SLIDER 4 */}
+          {/* SLIDE 4 (lazy + blur) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
+                  loader={cldLoader}
                   className="animated"
-                  src={SLIDER_SHIELD}
+                  src={CLD_SHIELD}
                   alt="Shamba Shield"
                   loading="lazy"
-                  fetchPriority="low"
-                  sizes="100vw"
+                  sizes={SIZES}
                   placeholder="blur"
                   blurDataURL={BLUR}
                   width={1920}
@@ -249,17 +255,17 @@ const HeroSlider = () => {
             </div>
           </div>
 
-          {/* SLIDER 5 */}
+          {/* SLIDE 5 (lazy + blur) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
+                  loader={cldLoader}
                   className="animated"
-                  src={SLIDER_CONNECT}
+                  src={CLD_CONNECT}
                   alt="Shamba Connect"
                   loading="lazy"
-                  fetchPriority="low"
-                  sizes="100vw"
+                  sizes={SIZES}
                   placeholder="blur"
                   blurDataURL={BLUR}
                   width={1920}
