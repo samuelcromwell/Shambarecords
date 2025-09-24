@@ -3,18 +3,27 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Head from 'next/head';
-
-import Slider1 from '/public/images/hero/cashboost.jpg';
-import Slider2 from '/public/images/hero/vet-care.jpg';
-import Slider3 from '/public/images/hero/smart-season.png';
-import Slider4 from '/public/images/hero/shamba-shield.jpg';
-import Slider5 from '/public/images/hero/shamba-connect.jpg';
-
 import Image from 'next/image';
 
 const ClickHandler = () => {
   if (typeof window !== 'undefined') window.scrollTo(10, 0);
 };
+
+/**
+ * Cloudinary URLs with delivery transforms:
+ * - f_auto: serve best format (AVIF/WebP/JP2) per browser
+ * - q_auto: pick optimal quality per asset
+ * (inserted as a transformation segment after /upload/)
+ */
+const SLIDER_SMART_SEASON = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711560/smart-season_hv2xwd.jpg';
+const SLIDER_CASHBOOST     = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711560/cashboost_umchtl.jpg';
+const SLIDER_VETCARE       = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711561/vet-care_z9x2fl.jpg';
+const SLIDER_SHIELD        = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711560/shamba-shield_is5dnc.jpg';
+const SLIDER_CONNECT       = 'https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_auto/v1758711559/shamba-connect_u5vh0m.jpg';
+
+// Tiny blur placeholder for non-initial slides
+const BLUR =
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEA8QEA8PEA8QDw8QDxAPEA8QDxAWFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGi0fHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAQMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAFBAb/xAAZEQADAQEBAAAAAAAAAAAAAAABAgMAHhH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAQT/xAAWEQEBAQAAAAAAAAAAAAAAAAABEQL/2gAMAwEAAhEDEQA/AL8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=';
 
 const HeroSlider = () => {
   const settings = {
@@ -23,8 +32,9 @@ const HeroSlider = () => {
     autoplaySpeed: 3000,
     arrows: true,
     dots: false,
-    // remove slick lazy loading completely so Next/Image can eagerly load
+    // keep slick lazy loading disabled so Next/Image can manage it
     // lazyLoad: 'progressive',
+    waitForAnimate: false, // snappier feel between slides
     responsive: [
       {
         breakpoint: 991,
@@ -38,31 +48,36 @@ const HeroSlider = () => {
 
   return (
     <>
-      {/* Preload ALL hero images so fetch starts before render */}
+      {/* Resource hints + Preload */}
       <Head>
-        <link rel="preload" as="image" href="/images/hero/smart-season.png" />
-        <link rel="preload" as="image" href="/images/hero/cashboost.jpg" />
-        <link rel="preload" as="image" href="/images/hero/vet-care.jpg" />
-        <link rel="preload" as="image" href="/images/hero/shamba-shield.jpg" />
-        <link rel="preload" as="image" href="/images/hero/shamba-connect.jpg" />
+        {/* Speed up connection to Cloudinary */}
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
+
+        {/* Preload the first TWO hero images for instant rendering */}
+        <link rel="preload" as="image" href={SLIDER_SMART_SEASON} imagesrcset={`${SLIDER_SMART_SEASON} 1920w`} imagesizes="100vw" />
+        <link rel="preload" as="image" href={SLIDER_CASHBOOST} imagesrcset={`${SLIDER_CASHBOOST} 1920w`} imagesizes="100vw" />
       </Head>
 
       <section className="hero-section">
         <Slider {...settings} className="hero-slider">
-          {/* SLIDER 1 */}
+          {/* SLIDER 1 (No blur, absolute priority) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
                   className="animated"
-                  src={Slider3}
+                  src={SLIDER_SMART_SEASON}
                   alt="Shamba SmartSeason"
+                  // Absolute highest priority for LCP
                   priority
                   loading="eager"
                   fetchPriority="high"
                   sizes="100vw"
-                  placeholder="blur"
-                  data-animation-in="zoomInImage"
+                  // No placeholder to avoid any transition shimmer
+                  width={1920}
+                  height={1080}
                 />
               </div>
               <div className="container">
@@ -96,20 +111,21 @@ const HeroSlider = () => {
             </div>
           </div>
 
-          {/* SLIDER 2 */}
+          {/* SLIDER 2 (No blur, very high priority) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
                   className="animated"
-                  src={Slider1}
+                  src={SLIDER_CASHBOOST}
                   alt="Shamba Cash Boost"
+                  // Next-most important frame—also eager
                   priority
                   loading="eager"
                   fetchPriority="high"
                   sizes="100vw"
-                  placeholder="blur"
-                  data-animation-in="zoomInImage"
+                  width={1920}
+                  height={1080}
                 />
               </div>
               <div className="container">
@@ -119,7 +135,8 @@ const HeroSlider = () => {
                   <h3 className="animated" data-animation-in="fadeInUp">Shamba Cash Boost</h3>
                   <p className="animated" data-animation-in="fadeInUp">
                     Say goodbye to paperwork and hello to data-driven credit. Shamba Cash Boost uses your actual farm
-                    performance — not your bank history — to unlock fast, fair, and transparent microloans…
+                    performance — not your bank history — to unlock fast, fair, and transparent microloans powered by
+                    intelligent credit scoring and real-time analytics.
                   </p>
                   <div className="hero-btn animated" data-animation-in="fadeInUp">
                     <div className="btn-1">
@@ -140,20 +157,21 @@ const HeroSlider = () => {
             </div>
           </div>
 
-          {/* SLIDER 3 */}
+          {/* SLIDER 3 (keep subtle blur for graceful decode) */}
           <div>
             <div className="slider-item">
               <div className="bg-image">
                 <Image
                   className="animated"
-                  src={Slider2}
+                  src={SLIDER_VETCARE}
                   alt="Shamba VetCare+"
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
+                  loading="lazy"
+                  fetchPriority="low"
                   sizes="100vw"
                   placeholder="blur"
-                  data-animation-in="zoomInImage"
+                  blurDataURL={BLUR}
+                  width={1920}
+                  height={1080}
                 />
               </div>
               <div className="container">
@@ -162,7 +180,9 @@ const HeroSlider = () => {
                   <h2 className="animated" data-animation-in="fadeInUp">AI-Driven Animal Health for Thriving Farms</h2>
                   <h3 className="animated" data-animation-in="fadeInUp">Shamba VetCare+</h3>
                   <p className="animated" data-animation-in="fadeInUp">
-                    Stay ahead of disease with smart animal health solutions…
+                    Stay ahead of disease with smart animal health solutions. VetCare+ uses AI to monitor livestock
+                    health, detect early risks, and connect farmers to instant veterinary support. Better care,
+                    lower mortality, higher profits.
                   </p>
                   <div className="hero-btn animated" data-animation-in="fadeInUp">
                     <div className="btn-1">
@@ -189,14 +209,15 @@ const HeroSlider = () => {
               <div className="bg-image">
                 <Image
                   className="animated"
-                  src={Slider4}
+                  src={SLIDER_SHIELD}
                   alt="Shamba Shield"
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
+                  loading="lazy"
+                  fetchPriority="low"
                   sizes="100vw"
                   placeholder="blur"
-                  data-animation-in="zoomInImage"
+                  blurDataURL={BLUR}
+                  width={1920}
+                  height={1080}
                 />
               </div>
               <div className="container">
@@ -205,7 +226,9 @@ const HeroSlider = () => {
                   <h2 className="animated" data-animation-in="fadeInUp">Protect Your Harvest. Empower Your Future.</h2>
                   <h3 className="animated" data-animation-in="fadeInUp">Shamba Shield</h3>
                   <p className="animated" data-animation-in="fadeInUp">
-                    In a world of climate shocks, Shamba Shield offers powerful protection…
+                    In a world of climate shocks, Shamba Shield offers powerful protection. Our digital insurance
+                    platform covers crops, livestock, equipment, and income — backed by verified farm records. Claims are
+                    processed quickly, transparently, and fairly.
                   </p>
                   <div className="hero-btn animated" data-animation-in="fadeInUp">
                     <div className="btn-1">
@@ -232,14 +255,15 @@ const HeroSlider = () => {
               <div className="bg-image">
                 <Image
                   className="animated"
-                  src={Slider5}
+                  src={SLIDER_CONNECT}
                   alt="Shamba Connect"
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
+                  loading="lazy"
+                  fetchPriority="low"
                   sizes="100vw"
                   placeholder="blur"
-                  data-animation-in="zoomInImage"
+                  blurDataURL={BLUR}
+                  width={1920}
+                  height={1080}
                 />
               </div>
               <div className="container">
@@ -248,7 +272,10 @@ const HeroSlider = () => {
                   <h2 className="animated" data-animation-in="fadeInUp">Seamless Integration from Farmer to Market</h2>
                   <h3 className="animated" data-animation-in="fadeInUp">Shamba Connect</h3>
                   <p className="animated" data-animation-in="fadeInUp">
-                    Digitize your entire value chain…
+                    Digitize your entire value chain. Shamba Connect is the CRM engine for cooperatives, aggregators, and
+                    agribusinesses, streamlining farmer onboarding, performance tracking, payment integration, and more.
+                    It connects every actor in agriculture — smallholders, processors, exporters — into a single
+                    data-powered ecosystem.
                   </p>
                   <div className="hero-btn animated" data-animation-in="fadeInUp">
                     <div className="btn-1">

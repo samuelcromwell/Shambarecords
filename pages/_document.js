@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
           <link rel="icon" href="/Logo/logovector.svg" />
 
           {/* 🚀 Preload ALL hero images so they begin downloading before paint */}
-          <link rel="preload" as="image" href="/images/hero/smart-season.png" />
+          <link rel="preload" as="image" href="/images/hero/smart-season.jpg" />
           <link rel="preload" as="image" href="/images/hero/cashboost.jpg" />
           <link rel="preload" as="image" href="/images/hero/vet-care.jpg" />
           <link rel="preload" as="image" href="/images/hero/shamba-shield.jpg" />

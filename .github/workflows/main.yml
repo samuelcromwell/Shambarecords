@@ -2,52 +2,44 @@ name: Build and Deploy Next.js
 
 on:
   push:
-    branches:
-      - main  # or your default branch
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Needed for release uploads
-      pages: write     # Needed for GitHub Pages
-      id-token: write  # Needed for GitHub Pages deployment
+      contents: read
+      pages: write
+      id-token: write
+    env:
+      STATIC_EXPORT: 'true' # enables export-only config in CI (see next.config.js)
 
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Install Dependencies
+      - name: Install
         run: npm ci
 
-      - name: Build Project
-        run: npm run build
-
-      
-
-      - name: Archive production build
+      - name: Build & Export (SSG)
+        # next.config.js conditionally sets export when STATIC_EXPORT === 'true'
         run: |
-          zip -r site.zip .next
+          npm run build
+          npx next export
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: "Build Release - ${{ github.sha }}"
-          tag_name: "build-${{ github.sha }}"
-          files: site.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
-      - name: Upload artifact for GitHub Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./next
+          path: ./out
 
   deploy:
     needs: build
@@ -55,11 +47,9 @@ jobs:
     permissions:
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
