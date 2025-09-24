@@ -1,0 +1,284 @@
+import React from 'react';
+
+export default function Derisking() {
+    const styles= {
+        page: {
+            padding: '4rem 2rem',
+                backgroundColor: '#f5fdf7',
+                color: '#1a1a1a',
+                fontFamily: 'Inter, sans-serif',
+        }
+
+        ,
+        container: {
+            maxWidth: '1000px',
+                margin: '0 auto',
+        }
+
+        ,
+        title: {
+            fontSize: '2.5rem',
+                fontWeight: 800,
+                color: '#065f46',
+                marginBottom: '1rem',
+        }
+
+        ,
+        subtitle: {
+            fontSize: '1.6rem',
+                color: '#065f46',
+                fontWeight: 600,
+                marginBottom: '1.5rem',
+        }
+
+        ,
+        text: {
+            fontSize: '1.1rem',
+                marginBottom: '1.2rem',
+                lineHeight: 1.6,
+        }
+
+        ,
+        impactBox: {
+            backgroundColor: '#e1fcef',
+                padding: '1rem 1.5rem',
+                borderLeft: '4px solid #10b981',
+                marginBottom: '1.5rem',
+        }
+
+        ,
+        sectionHeader: {
+            marginTop: '2rem',
+                fontSize: '1.4rem',
+                fontWeight: 700,
+                color: '#047857',
+                marginBottom: '1rem',
+        }
+
+        ,
+        modelBox: {
+            paddingLeft: '1rem',
+        }
+
+        ,
+        h4: {
+            fontSize: '1.2rem',
+                color: '#065f46',
+                marginTop: '1rem',
+        }
+
+        ,
+        ul: {
+            paddingLeft: '1.2rem',
+                marginTop: '0.5rem',
+        }
+
+        ,
+        li: {
+            marginBottom: '0.5rem',
+        }
+
+        ,
+    }
+
+    ;
+
+    return (<div style= {
+            styles.page
+        }
+
+        > <div style= {
+            styles.container
+        }
+
+        > <h1 style= {
+            styles.title
+        }
+
+        >De-Risking the Farmer: Building Resilience in an Era of Uncertainty</h1> <h2 style= {
+            styles.subtitle
+        }
+
+        >From Vulnerable to Unstoppable: The Journey of the African Farmer</h2> <p style= {
+            styles.text
+        }
+
+        > For decades, Africa’s smallholder farmers have faced the harshest consequences of climate change — not because they caused it, but because they’ve been left to fight it alone. Unpredictable rains. Drought. Floods. Pest outbreaks. Rising input costs. Market instability. </p> <div style= {
+            styles.impactBox
+        }
+
+        > <p>📉 <strong>Result?</strong></p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >Over 60% of farmers in Sub-Saharan Africa operate without insurance, access to credit, or data-driven decision tools.</li> <li style= {
+            styles.li
+        }
+
+        >Only 2% are formally banked.</li> <li style= {
+            styles.li
+        }
+
+        >Up to 30–40% of harvests are lost post-production due to inefficiencies and climate-induced shocks.</li> </ul> </div> <p style= {
+            styles.text
+        }
+
+        > <strong>Shamba Records is here to flip the script</strong> — from vulnerability to viability, from risk to resilience. </p> <h3 style= {
+            styles.sectionHeader
+        }
+
+        >🌱 Our De-Risking Model: Powered by Data. Driven by Impact.</h3> <div style= {
+            styles.modelBox
+        }
+
+        > <h4 style= {
+            styles.h4
+        }
+
+        >1. 🌡️ Predict. Prevent. Prepare.</h4> <p>We harness AI and satellite data to forecast climate risks, recommend adaptive farming techniques, and deploy early warning systems.</p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >✅ 85% prediction accuracy on rainfall variability</li> <li style= {
+            styles.li
+        }
+
+        >✅ Real-time alerts to farmers across 20+ counties</li> </ul> <h4 style= {
+            styles.h4
+        }
+
+        >2. 💸 De-risk Through Smart Finance</h4> <p>Our intelligent credit scoring uses verified farm records, season trends, and geolocation data to unlock low-risk microloans — even for unbanked farmers.</p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >🚜 Over $1.1M in credit unlocked with &lt; 2% default rate</li> <li style= {
+            styles.li
+        }
+
+        >📊 Zero-paper processing, 100% data-backed</li> </ul> <h4 style= {
+            styles.h4
+        }
+
+        >3. 🌳 Build Income from Sustainability</h4> <p>Through our CarbonGrow program, farmers are rewarded for adopting regenerative agriculture and agroforestry practices that store carbon and regenerate the land.</p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >🌾 1, 500+ acres under regenerative management</li> <li style= {
+            styles.li
+        }
+
+        >💰 Carbon credits=new income stream for climate-smart farmers</li> </ul> <h4 style= {
+            styles.h4
+        }
+
+        >4. 🧠 AI-Powered Insurance (Shamba Shield)</h4> <p>We eliminate guesswork and paperwork — replacing them with verified climate data, smart contracts, and faster payouts.</p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >⚡ Average claim approval time: 5 days</li> <li style= {
+            styles.li
+        }
+
+        >🛡️ Covers crops, livestock, equipment, and even health</li> <li style= {
+            styles.li
+        }
+
+        >📈 Up to 40% more insured farms compared to traditional models</li> </ul> </div> <h3 style= {
+            styles.sectionHeader
+        }
+
+        >👣 A Farmer’s Journey with Shamba Records</h3> <p><strong>Before:</strong> Amina, a maize farmer in Kitale, relied on rain-fed agriculture. One failed season meant financial disaster. No loans. No insurance. No safety net.</p> <p><strong>After:</strong></p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >🌤️ She receives seasonal climate forecasts & alerts.</li> <li style= {
+            styles.li
+        }
+
+        >🌽 Her yields rose by 35% in 2 years through SmartSeason advisory.</li> <li style= {
+            styles.li
+        }
+
+        >💳 She accessed her first microloan through Shamba Cash Boost.</li> <li style= {
+            styles.li
+        }
+
+        >🌱 She's part of a carbon-smart farming cohort, earning from credits.</li>
+ <li style= {
+            styles.li
+        }
+
+        >🌍 Her farm is fully traceable — and now exports certified maize to East Africa.</li> </ul> <p><strong>Amina’s farm is now resilient, bankable, and profitable.</strong></p> <h3 style= {
+            styles.sectionHeader
+        }
+
+        >📈 The ROI of Resilience</h3> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >🌍 40, 000+ farmers de-risked through our ecosystem</li> <li style= {
+            styles.li
+        }
+
+        >🔄 50% reduction in post-harvest losses</li> <li style= {
+            styles.li
+        }
+
+        >💸 3x increase in financial inclusion in participating cooperatives</li> <li style= {
+            styles.li
+        }
+
+        >🌾 5+ climate risk mitigation tools embedded in our tech stack</li> <li style= {
+            styles.li
+        }
+
+        >📣 Farmers using Shamba Records are 2.7x more likely to scale production and secure markets</li> </ul> <h3 style= {
+            styles.sectionHeader
+        }
+
+        >🤝 A Call to Investors, Governments & Partners</h3> <p> Climate risk is no longer an environmental issue — it’s a food security crisis, an economic roadblock, and a social justice emergency. But it’s solvable — if we invest in data, infrastructure, and innovation at the last mile. </p> <p> <strong>Shamba Records is your trusted partner in climate-proofing African agriculture.</strong> </p> <ul style= {
+            styles.ul
+        }
+
+        > <li style= {
+            styles.li
+        }
+
+        >🔗 Partner with us.</li> <li style= {
+            styles.li
+        }
+
+        >🌾 Invest in a safer, more resilient farming future.</li> <li style= {
+            styles.li
+        }
+
+        >🌍 Help us safeguard the farmers who feed the world.</li> </ul> </div> </div>);
+}

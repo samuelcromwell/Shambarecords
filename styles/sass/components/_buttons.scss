@@ -1,0 +1,87 @@
+.theme-btn {
+	background: $theme-primary-color-s2;
+	color: $white;
+	display: inline-block;
+	padding: 21px 45px;
+	border: 0;
+	text-transform: capitalize;
+	-webkit-backface-visibility: hidden;
+	z-index: 1;
+	position: relative;
+	font-size: 15px;
+	border-radius: 0px;
+	font-family: $heading-font;
+	font-weight: 700;
+	letter-spacing: 0.75px;
+	text-transform: uppercase;
+	overflow: hidden;
+
+	@media (max-width:991px) {
+		font-size: 14px;
+		padding: 18px 45px;
+	}
+
+	&::before {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 50%;
+		height: 0;
+		content: "";
+		background-color: $theme-primary-color;
+		transition: all 0.4s ease-in-out;
+		border-radius: 0;
+		z-index: -1;
+	}
+
+	&:after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 51%;
+		height: 0;
+		content: "";
+		background-color: $theme-primary-color;
+		transition: all 0.4s ease-in-out;
+		border-radius: 0;
+		z-index: -1;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $white;
+	}
+
+	&:hover::before {
+		height: 100%;
+	}
+
+	&:hover:after {
+		height: 100%;
+	}
+
+
+
+	@include media-query(767px) {
+		padding: 12px 18px;
+		font-size: 14px;
+	}
+}
+
+.view-cart-btn {
+	@extend .theme-btn;
+	display: block;
+	margin-top: 15px;
+	border-radius: 5px;
+	padding: 10px 45px;
+
+
+
+	
+
+	&.s1 {
+		background: #ddd;
+	}
+
+}

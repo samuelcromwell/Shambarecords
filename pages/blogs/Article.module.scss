@@ -1,0 +1,175 @@
+/* components/Articles/Article.module.scss */
+
+.loading,
+.error {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.2em;
+    color: #666666;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.articleContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Added space at the top and bottom */
+    padding: 50px 20px;
+    /* Original padding was 0 20px. Now 50px top/bottom for mobile */
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+    @media (min-width: 768px) {
+        /* Adjusted padding for larger screens */
+        padding: 80px 40px;
+        /* Increased top/bottom padding for desktop */
+    }
+}
+
+.hero {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+    @media (max-width: 575.98px) {
+        height: 250px;
+        margin-bottom: 20px;
+    }
+}
+
+.contentWrapper {
+    padding-bottom: 60px;
+    line-height: 1.7;
+
+    h1 {
+        font-size: 2.8em;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        line-height: 1.2;
+
+        @media (max-width: 575.98px) {
+            font-size: 2.2em;
+        }
+    }
+
+    .date {
+        font-size: 0.875em;
+        color: #666666;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    .content {
+        color: #333333;
+        font-size: 1em;
+
+        h2 {
+            font-size: 2.2em;
+            color: #333333;
+            margin-top: 40px;
+            margin-bottom: 20px;
+
+            @media (max-width: 575.98px) {
+                font-size: 1.8em;
+            }
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #333333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+
+            @media (max-width: 575.98px) {
+                font-size: 1.5em;
+            }
+        }
+
+        p {
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        a {
+            color: #0070f3;
+            text-decoration: underline;
+            transition: color 0.2s ease-in-out;
+
+            &:hover {
+                color: darken(#0070f3, 15%);
+            }
+        }
+
+        ul,
+        ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+
+            li {
+                margin-bottom: 10px;
+            }
+        }
+
+        blockquote {
+            border-left: 5px solid #0070f3;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666666;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            font-family: 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #cccccc;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-family: 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+            color: #cccccc;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+
+            th,
+            td {
+                border: 1px solid #e0e0e0;
+                padding: 10px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+        }
+    }
+}

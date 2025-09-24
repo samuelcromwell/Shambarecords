@@ -1,0 +1,189 @@
+.responsiveVideo {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; // 16:9 Aspect Ratio (9/16 = 0.5625)
+    overflow: hidden;
+    border-radius: 12px;
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+}
+
+.impact-section {
+    padding: 4rem 1.5rem;
+    background: #f9fafb;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+
+    .container {
+        max-width: 1240px;
+        margin: 0 auto;
+    }
+
+        .videoWrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem; // space from page margins
+            width: 100%;
+            box-sizing: border-box;
+        }
+                @media screen and (max-width: 768px) {
+                    .videoWrapper {
+                        padding: 0;
+                    }       }
+        .videoContainer {
+            position: relative;
+            width: 100%;
+            max-width: 1280px; // keeps video from stretching too far on wide screens
+            height: 720px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 12px;
+            @media screen and (max-width: 768px) {
+                    height: 300px;
+                    max-width: fit-content;
+                    border-radius: 0;
+                    -webkit-border-radius: 0;
+                    -moz-border-radius: 0;
+                    -ms-border-radius: 0;
+                    -o-border-radius: 0;       }
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: inherit;
+            }
+        }
+    
+        .videoControls {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+    
+            button {
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 0.4rem 0.6rem;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background 0.2s ease;
+    
+                &:hover {
+                    background: rgba(0, 0, 0, 0.8);
+                }
+            }
+        }
+    .impact-header {
+        text-align: center;
+        margin-bottom: 3rem;
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #003d1f;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .impact-stats {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 4rem;
+
+        .stat {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+
+            .icon {
+                font-size: 2.5rem;
+                color: #0c8e47;
+                margin-bottom: 0.5rem;
+            }
+
+            h3 {
+                font-size: 2rem;
+                color: #0c8e47;
+                margin-bottom: 0.25rem;
+            }
+
+            p {
+                font-size: 1rem;
+                color: #444;
+            }
+        }
+    }
+
+    .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+
+        .impact-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .content {
+                padding: 1.5rem;
+
+                h4 {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color: #003d1f;
+                    margin-bottom: 0.5rem;
+                }
+
+                p {
+                    color: #555;
+                    line-height: 1.6;
+                }
+            }
+        }
+    }
+
+    .callout {
+        background: #e6f4ec;
+        padding: 2rem;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #003d1f;
+        margin-top: 2rem;
+    }
+}
