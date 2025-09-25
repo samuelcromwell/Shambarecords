@@ -88,8 +88,6 @@ const menus = [
     //     title: 'Blogs',
     //     link: '/blogs',
     // }
-
-
 ]
 
 
@@ -113,11 +111,14 @@ const MobileMenu = () => {
                     {menus.map((item, mn) => {
                         return (
                             <ListItem className={item.id === openId ? 'active' : null} key={mn}>
-                           
                                 {item.submenu ?
                                     <Fragment>
-                                        <p onClick={() => setOpenId(item.id === openId ? 0 : item.id)}>{item.title}
-                                            <i className={item.id === openId ? 'fa fa-angle-up' : 'fa fa-angle-down'}></i>
+                                        <p onClick={() => setOpenId(item.id === openId ? 0 : item.id)}>
+                                            {item.title}
+                                            <i
+                                                className={item.id === openId ? 'fa fa-angle-up' : 'fa fa-angle-down'}
+                                                style={{ marginRight: 60 }} // Option A: add spacing so arrow is visible
+                                            />
                                         </p>
                                         <Collapse in={item.id === openId} timeout="auto" unmountOnExit>
                                             <List className="subMenu">
@@ -152,7 +153,6 @@ const MobileMenu = () => {
                                     : <Link className="active"
                                         href={item.link}>{item.title}</Link>
                                 }
-                            
                             </ListItem>
                         )
                     })}
