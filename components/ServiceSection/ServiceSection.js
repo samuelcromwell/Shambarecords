@@ -5,17 +5,42 @@ import Services from "../../api/Services";
 import Slider from "react-slick";
 import Image from "next/image";
 
-// Cloudinary loader -> builds responsive URLs (no /_next/image 500s)
+// Cloudinary loader: add responsive transforms safely
 const cldLoader = ({ src, width, quality }) => {
   const q = typeof quality === 'number' ? quality : 75;
-  // extract the public part after /upload/
-  let publicPart = src;
-  if (src.startsWith('http')) {
-    const m = src.match(/\/upload\/(.+)$/);
-    publicPart = m ? m[1] : src.replace(/^https?:\/\/[^/]+\//, '');
+  // if the URL already has /upload/, inject/override width + sane defaults
+  try {
+    const url = new URL(src);
+    const path = url.pathname;
+    const idx = path.indexOf('/upload/');
+    if (idx === -1) return src; // not a cloudinary upload url
+    const prefix = path.slice(0, idx + 8); // includes "/upload/"
+    const rest = path.slice(idx + 8);
+
+    // split "transform(s)/publicId"
+    const firstSlash = rest.indexOf('/');
+    let transforms = firstSlash === -1 ? rest : rest.slice(0, firstSlash);
+    const publicId = firstSlash === -1 ? '' : rest.slice(firstSlash + 1);
+
+    // normalize transforms (remove existing w_/q_/f_ so we can set them)
+    const parts = transforms && transforms.includes(',')
+      ? transforms.split(',').filter(t => !/^w_/.test(t) && !/^q_/.test(t) && !/^f_/.test(t))
+      : (transforms ? [transforms] : []);
+
+    const newTransforms = ['f_auto', `q_${q}`, 'c_fill', 'g_auto', `w_${width}`, ...parts]
+      .filter(Boolean)
+      .join(',');
+
+    url.pathname = `${prefix}${newTransforms}/${publicId}`;
+    return url.toString();
+  } catch {
+    // if src isn't a valid URL, just return it
+    return src;
   }
-  return `https://res.cloudinary.com/dwoxop5y0/image/upload/f_auto,q_${q},dpr_auto,c_fill,g_auto,w_${width}/${publicPart}`;
 };
+
+const SIZES =
+  "(min-width:1536px) 600px, (min-width:1280px) 520px, (min-width:1024px) 480px, (min-width:768px) 50vw, 100vw";
 
 const ServiceSection = (props) => {
   const ClickHandler = () => {
@@ -29,7 +54,7 @@ const ServiceSection = (props) => {
     autoplay: true,
     infinite: false,
     arrows: false,
-    speed: 300,
+    speed: 3000,
     slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
@@ -39,10 +64,8 @@ const ServiceSection = (props) => {
     ],
   };
 
-  const SIZES = "(min-width:1536px) 600px, (min-width:1280px) 520px, (min-width:1024px) 480px, (min-width:768px) 50vw, 100vw";
-
   return (
-    <div className={"" + props.hclass} >
+    <div className={"" + props.hclass}>
       <div className="container">
         <div className="row align-items-end">
           <div className="col-lg-7 col-12">
@@ -58,25 +81,18 @@ const ServiceSection = (props) => {
 
       <div className="container-fluid g-0">
         <Slider {...settings} className="service-slider">
-          {Services.map((service) => (
-            <div className="service-card" key={service.id}>
-              {/* SIZED PARENT with position: relative (not a class) */}
-              <div
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  paddingTop: '56.25%', // 16:9
-                  overflow: 'hidden',
-                }}
-              >
+          {Services.map((service, idx) => (
+            <div className="service-card" key={service.id ?? idx}>
+              {/* REQUIRED: sized, relative parent for Next/Image fill */}
+              <div className="img-wrap">
                 <Image
                   loader={cldLoader}
                   src={service.image}
-                  alt={service.title || 'Service image'}
+                  alt={service.title || ''}
                   fill
                   sizes={SIZES}
                   className="image"
-                  priority={service.id === 1}
+                  priority={idx === 0}
                 />
               </div>
 
@@ -112,6 +128,6 @@ const ServiceSection = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default ServiceSection;

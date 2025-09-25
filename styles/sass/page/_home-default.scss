@@ -497,212 +497,216 @@
 }
 
 .service-card {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    margin: 0 10px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  margin: 0 10px;
 
+  &::before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px;
+    width: 0;
+    bottom: 0;
+    content: '';
+    background: radial-gradient(272.74% 97.55% at 66.64% 8.36%, rgba(0, 7, 31, 0.00) 0%, rgba(5, 76, 37, 0.91) 99.98%, rgba(4, 43, 51, 0.91) 99.99%);
+    transition: all .4s ease-in-out;
+    z-index: 1;
+  }
+
+  /* NEW: wrapper for Next/Image `fill` */
+  .img-wrap {
+    position: relative;      /* required for fill */
+    width: 100%;
+    height: 300px;           /* your fixed card image height */
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  /* Image element (Next adds inline position:absolute; inset:0) */
+  .image {
+    position: absolute;      /* safe for non-inline cases */
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 340px;
+    height: 100%;
+    display: flex;
+    z-index: 11;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    overflow: hidden;
+    box-sizing: border-box;  /* include padding in height */
+
+    @media (max-width:991px) {
+      padding-left: 30px;
+      padding-right: 30px;
+      max-width: 330px;
+    }
+
+    @media (max-width:767px) {
+      justify-content: center;
+    }
+
+    @media (max-width:575px) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
 
     &::before {
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 20px;
-        width: 0;
-        bottom: 0;
-        content: '';
-        background: radial-gradient(272.74% 97.55% at 66.64% 8.36%, rgba(0, 7, 31, 0.00) 0%, rgba(5, 76, 37, 0.91) 99.98%, rgba(4, 43, 51, 0.91) 99.99%);
-        transition: all .4s ease-in-out;
-        z-index: 1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background: #fff;
+      transition: all 1.5s ease-in-out;
+      z-index: -1;
     }
 
-    .image {
-        width: 100%;
-        height: 300px;
-        max-height: 300px;
+    i {
+      color: $small-black;
+      font-size: 78px;
+      transition: all 1.5s ease-in-out;
 
-        object-fit: cover;
-        position: relative;
-        z-index: -1;
+      @media (max-width:991px) {
+        font-size: 50px;
+      }
+
+      @media (max-width:575px) {
+        font-size: 40px;
+      }
     }
 
-    .content {
-        position: absolute;
-        left: 0;
-        top: 0;
-        max-width: 340px;
-        height: 100%;
-        display: flex;
-
-        z-index: 11;
-        flex-direction: column;
-        justify-content: space-around;
-        padding: 20px;
-        overflow: hidden;
+    .text {
+      span {
+        color: $text-light-color-s3;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.66px;
+        display: inline-block;
+        margin-bottom: 10px;
 
         @media (max-width:991px) {
-            padding-left: 30px;
-            padding-right: 30px;
-            max-width: 330px;
+          margin-bottom: 0;
+        }
+      }
+
+      h2 {
+        margin-bottom: 20px;
+
+        @media (max-width:991px) {
+          margin-bottom: 10px;
         }
 
-        @media (max-width:767px) {
-            justify-content: center;
+        a {
+          color: #222;
+          font-family: $heading-font;
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 30px;
+          letter-spacing: -0.72px;
+          text-transform: capitalize;
+          transition: all 1.5s ease-in-out;
         }
+      }
+
+      p {
+        color: #5E5F63;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 26px;
+        transition: all 1.5s ease-in-out;
+      }
+
+      .service-single-link {
+        width: 76px;
+        height: 47px;
+        line-height: 47px;
+        border-radius: 23.5px;
+        background: #F6F2ED;
+        display: block;
+        text-align: center;
+        margin-top: 30px;
 
         @media (max-width:575px) {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        &::before {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            content: '';
-            background: #fff;
-            transition: all 1.5s ease-in-out;
-            z-index: -1;
+          margin-top: 0px;
+          width: 50px;
+          height: 30px;
+          line-height: 47px;
         }
 
         i {
-            color: $small-black;
-            font-size: 78px;
-            transition: all 1.5s ease-in-out;
+          transform: rotate(-40deg);
+          color: #222;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 45px;
+          position: absolute;
+          left: 70px;
 
-            @media (max-width:991px) {
-                font-size: 50px;
-            }
+          @media (max-width:991px) {
+            left: 60px;
+            line-height: 45px;
+          }
 
-            @media (max-width:575px) {
-                font-size: 40px;
-            }
+          @media (max-width:575px) {
+            left: 28px;
+            font-size: 13px;
+            line-height: 32px;
+          }
         }
+      }
+    }
+  }
 
-        .text {
-
-            span {
-                color: $text-light-color-s3;
-                font-size: 22px;
-                font-weight: 700;
-                line-height: 30px;
-                letter-spacing: -0.66px;
-                display: inline-block;
-                margin-bottom: 10px;
-
-                @media (max-width:991px) {
-                    margin-bottom: 0;
-                }
-            }
-
-            h2 {
-                margin-bottom: 20px;
-
-                @media (max-width:991px) {
-                    margin-bottom: 10px;
-                }
-
-                a {
-                    color: #222;
-                    font-family: $heading-font;
-                    font-size: 24px;
-                    font-weight: 600;
-                    line-height: 30px;
-                    letter-spacing: -0.72px;
-                    text-transform: capitalize;
-                    transition: all 1.5s ease-in-out;
-                }
-            }
-
-            p {
-                color: #5E5F63;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 26px;
-                transition: all 1.5s ease-in-out;
-            }
-
-            .service-single-link {
-                width: 76px;
-                height: 47px;
-                line-height: 47px;
-                border-radius: 23.5px;
-                background: #F6F2ED;
-                display: block;
-                text-align: center;
-                margin-top: 30px;
-
-                @media (max-width:575px) {
-                    margin-top: 0px;
-                    width: 50px;
-                    height: 30px;
-                    line-height: 47px;
-                }
-
-                i {
-                    transform: rotate(-40deg);
-                    color: #222;
-                    font-size: 16px;
-                    font-weight: 400;
-                    line-height: 45px;
-                    position: absolute;
-                    left: 70px;
-
-                    @media (max-width:991px) {
-                        left: 60px;
-                        line-height: 45px;
-                    }
-
-                    @media (max-width:575px) {
-                        left: 28px;
-                        font-size: 13px;
-                        line-height: 32px;
-                    }
-                }
-            }
-        }
+  &:hover {
+    &::before {
+      width: 100%;
     }
 
-    &:hover {
-        &::before {
-            width: 100%;
+    .content {
+      i {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      &::before {
+        width: 0;
+      }
+
+      .text {
+        h2 {
+          a {
+            color: $white;
+          }
         }
 
-        .content {
-            i {
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            &::before {
-                width: 0;
-            }
-
-            .text {
-
-                h2 {
-
-                    a {
-                        color: $white;
-                    }
-                }
-
-                p {
-                    color: #C2C2C2;
-                }
-
-                .service-single-link {
-
-                    i {
-                        opacity: 1;
-                        visibility: visible;
-                    }
-                }
-            }
+        p {
+          color: #C2C2C2;
         }
+
+        .service-single-link {
+          i {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
     }
+  }
 }
 
 /*3.4 wpo-funfact-section */
