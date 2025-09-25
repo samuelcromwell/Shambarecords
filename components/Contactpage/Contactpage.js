@@ -59,7 +59,7 @@ const Contactpage = () => {
 
                             <div className="text-center">
                                 <div className="title mb-4">
-                                    <h2>Fill Up The Form</h2>
+                                    <h2>Fill Out The Form</h2>
                                 </div>
                                 <ContactForm />
                             </div>

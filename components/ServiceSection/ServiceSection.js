@@ -27,7 +27,7 @@ const ServiceSection = (props) => {
   const settings = {
     dots: true,
     autoplay: true,
-    infinite: true,
+    infinite: false,
     arrows: false,
     speed: 300,
     slidesToShow: 3,
@@ -49,7 +49,7 @@ const ServiceSection = (props) => {
             {SectionTitleShow && (
               <SectionTitle
                 subtitle={'Driving Financial Inclusion, Climate Resilience & Global Market Access — One Farmer at a Time.'}
-                title={'Our Innovations:That Power the Future of Farming'}
+                title={'Our Innovations: That Power the Future of Farming'}
               />
             )}
           </div>
