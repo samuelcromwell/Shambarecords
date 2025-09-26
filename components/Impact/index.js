@@ -10,10 +10,12 @@ import {
     FaLeaf,
 } from 'react-icons/fa';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+
 export default function ImpactSection() {
-        const [isPlaying, setIsPlaying] = useState(true);
-        const [isMuted, setIsMuted] = useState(true);
-        const videoRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(true);
+    const [isMuted, setIsMuted] = useState(true);
+    const videoRef = useRef(null);
+
     return (
         <section className={styles['impact-section']}>
             <div className={styles.container}>
@@ -42,7 +44,10 @@ export default function ImpactSection() {
 
                 <div className={styles['impact-grid']}>
                     <div className={styles['impact-card']}>
-                        <img src="/images/kenya-farm.jpg" alt="Kenya Farm" />
+                        <img
+                            src="https://res.cloudinary.com/dwoxop5y0/image/upload/v1758870901/kenya-farm_j1ysg1.jpg"
+                            alt="Kenya Farm"
+                        />
                         <div className={styles.content}>
                             <h4>Local Roots to Continental Scale</h4>
                             <p>
@@ -52,7 +57,10 @@ export default function ImpactSection() {
                         </div>
                     </div>
                     <div className={styles['impact-card']}>
-                        <img src="/images/farmers.png" alt="Farmers" />
+                        <img
+                            src="https://res.cloudinary.com/dwoxop5y0/image/upload/v1758870901/farmers_bgoj2y.png"
+                            alt="Farmers"
+                        />
                         <div className={styles.content}>
                             <h4>Transformation at Every Level</h4>
                             <p>
@@ -62,7 +70,10 @@ export default function ImpactSection() {
                         </div>
                     </div>
                     <div className={styles['impact-card']}>
-                        <img src="/images/global-trade.jpg" alt="Export Market" />
+                        <img
+                            src="https://res.cloudinary.com/dwoxop5y0/image/upload/v1758871189/top-view-vegetables-arrangement-with-plate_1_wavloc.jpg"
+                            alt="Export Market"
+                        />
                         <div className={styles.content}>
                             <h4>Global Market Access</h4>
                             <p>
@@ -72,7 +83,17 @@ export default function ImpactSection() {
                         </div>
                     </div>
                 </div>
-                <iframe width="100%" height="500" src="https://www.youtube.com/embed/mhZSTXecmQI?si=kn_8xfTdImQT83yc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                <iframe
+                    width="100%"
+                    height="500"
+                    src="https://www.youtube.com/embed/mhZSTXecmQI?si=kn_8xfTdImQT83yc"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                ></iframe>
 
                 <div className={styles.callout}>
                     <h3>
