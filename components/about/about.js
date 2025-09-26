@@ -8,7 +8,6 @@ import Ab from '/public/images/about/ab5.jpg'
 import Abd2 from '/public/images/about/ab1.jpg'
 import Abd3 from '/public/images/about/ab2.jpg'
 import Abd4 from '/public/images/about/ab3.jpg'
-import Abd5 from '/public/images/about/shape.png'
 import Abd6 from '/public/images/about/ceo.jpg'
 
 import Image from 'next/image';
@@ -41,7 +40,7 @@ const about = (props) => {
 
                             <div className="since">
                                 <div>
-                                    <h2> <CountUp end={40000} enableScrollSpy>00</CountUp> </h2>
+                                    <h2> <CountUp end={50000} enableScrollSpy>00</CountUp> </h2>
                                     <p>Farmers</p>
                                 </div>
                             </div>
